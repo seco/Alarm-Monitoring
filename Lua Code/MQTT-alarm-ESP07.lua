@@ -1,6 +1,6 @@
 -- NetworX Security System Monitoring with ESP-07
 -- February 11, 2015 tgmaxx
--- Updated February 11, 2016 tgmaxx
+-- Updated July 16, 2016 tgmaxx - increased onAux timer delay to 1 second
 
 print("LUA Interpreter started")
 
@@ -45,7 +45,7 @@ end)
 
 function onAux(index, level)
   m:publish("NX8V2", "AUX" .. index, 0, 0)
-  tmr.delay(500000)
+  tmr.delay(1000000)
 end
 
 gpio.trig(6, "down", function(level) onAux(1,level) end)
