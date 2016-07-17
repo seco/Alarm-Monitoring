@@ -2,6 +2,7 @@
 // NetworX Security System Monitoring with ESP8266
 // Tested on ESP-07 and NodeMCU v1.0
 // February 13, 2016
+// July 17, 2016 -- need to fix debounce delay in onAux ISR's
 //
 // by tgmaxx  <tgmaxx [at] gmail [dot] com>
 //----------------------------------------------------------------------------------
