@@ -1,7 +1,7 @@
 -- NetworX Security System Monitoring with ESP-07
 -- February 11, 2015 tgmaxx
--- Updated July 16, 2016 tgmaxx - having issues with onAux timer delay
---                                Need to replace with something else
+-- Updated July 16, 2016 tgmaxx - fixed onAux debounce
+--                                delay with tmr.alarm
 
 print("LUA Interpreter started")
 
@@ -45,9 +45,9 @@ m:on("message", function(conn, topic, data)
 end)
 
 function onAux(index, level)
-  m:publish("NX8V2", "AUX" .. index, 0, 0)
--- need to fix this to not use tmr.delay
-  tmr.delay(1000000)
+  tmr.alarm(2, 1000, tmr.ALARM_SINGLE, function()
+    m:publish("NX8V2", "AUX" .. index, 0, 0)
+  end)
 end
 
 gpio.trig(6, "down", function(level) onAux(1,level) end)
