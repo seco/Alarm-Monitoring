@@ -2,8 +2,7 @@
 // NetworX Security System Monitoring with ESP8266
 // Tested on ESP-07 and NodeMCU v1.0
 // February 15, 2016
-// July 18, 2016 - trying to fix delay in onAux ISR's
-//               - need 1 second
+// July 19, 2016 - created myDelay func for onAux ISR's
 //
 // by tgmaxx  <tgmaxx [at] gmail [dot] com>
 //----------------------------------------------------------------
@@ -84,29 +83,31 @@ void reconnect() {
   }
 }
 
+void myDelay(int x)   {
+  for(unsigned int i=0; i<=x; i++)   
+  {
+    delayMicroseconds(1000);
+  }
+}
+
 void onAux1() {
   client.publish(mqtt_topic, "AUX1"); // Burglar Alarm
-  for(byte i=0; i<100; i++) {
-    delayMicroseconds(10000);
-  }
+  myDelay(1000);
 }
+
 void onAux2() {
   client.publish(mqtt_topic, "AUX2"); // Fire Alarm
-  for(byte i=0; i<100; i++) {
-    delayMicroseconds(10000);
-  }
+  myDelay(1000);
 }
+
 void onAux3() {
   client.publish(mqtt_topic, "AUX3"); // System Armed
-  for(byte i=0; i<100; i++) {
-    delayMicroseconds(10000);
-  }
+  myDelay(1000);
 }
+
 void onAux4() {
   client.publish(mqtt_topic, "AUX4"); // System Disarmed
-  for(byte i=0; i<100; i++) {
-    delayMicroseconds(10000);
-  }
+  myDelay(1000);
 }
 
 void setup() {
